@@ -8,9 +8,9 @@ Player::Player()
 	width = texture.getSize().x / 3;
 	height = texture.getSize().y / NBLINES;
 	player.setTexture(texture);
-	player.setTextureRect(sf::IntRect(0, 0, width, height));
+	//player.setTextureRect(sf::IntRect(0, 0, width, height));
 	player.setPosition(100, 100);
-	player.scale(4, 4);
+	player.scale(3, 3);
 	sens = DOWN;
 
 }
@@ -36,8 +36,9 @@ void Player::move(const sf::RenderWindow &win)
 	sf::Vector2u win_size;
 	sf::Vector2f player_pos;
 
-	win_size = win.getSize();
-	player_pos = player.getPosition();
+	win_size = win.getSize(); // Taille de la fenêtre
+	player_pos = player.getPosition(); // Position du joueur
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		moveUpRight((player_pos.x + width * player.getScale().y) + 1 < win_size.x && player_pos.y - 1 > 0);
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
@@ -54,6 +55,7 @@ void Player::move(const sf::RenderWindow &win)
 		moveLeft(player_pos.x - 1 > 0);
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		moveRight((player_pos.x + width * player.getScale().y) + 1 < win_size.x);
+
 	player.setTextureRect(sf::IntRect(0, sens * height, width, height));
 }
 

@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "Player.h"
+#include "Coin.h"
 
 int main()
 {
@@ -8,8 +9,11 @@ int main()
 	sf::RectangleShape background;
 	sf::Vector2f winSize;
 
-	Player player;
+	Player	player;
+	Coin	coin;
+
 	srand(time(NULL));
+
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -37,6 +41,7 @@ int main()
 		window.clear();
 		window.draw(background);
 		window.draw(player.getPlayer());
+		window.draw(coin.getCoin());
 		window.display();
 	}
 	return (0);
