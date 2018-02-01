@@ -9,11 +9,10 @@ int main()
 	sf::RectangleShape background;
 	sf::Vector2f winSize;
 
-	Player	player;
+	Player				player;
 	Coin	coin;
 
 	srand(time(NULL));
-
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -39,9 +38,12 @@ int main()
 		background.setFillColor(sf::Color::Black);
 		player.move(window);
 		window.clear();
+
 		window.draw(background);
+
 		window.draw(player.getPlayer());
 		window.draw(coin.getCoin());
+
 		window.display();
 	}
 	return (0);

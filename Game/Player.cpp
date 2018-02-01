@@ -8,9 +8,10 @@ Player::Player()
 	width = texture.getSize().x / 3;
 	height = texture.getSize().y / NBLINES;
 	player.setTexture(texture);
-	//player.setTextureRect(sf::IntRect(0, 0, width, height));
+	player.setTextureRect(sf::IntRect(0, 0, width, height));
 	player.setPosition(100, 100);
 	player.scale(3, 3);
+	sprite = 0;
 	sens = DOWN;
 
 }
@@ -56,7 +57,8 @@ void Player::move(const sf::RenderWindow &win)
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		moveRight((player_pos.x + width * player.getScale().y) + 1 < win_size.x);
 
-	player.setTextureRect(sf::IntRect(0, sens * height, width, height));
+	//sprite = (sprite + 1) % 3;
+	player.setTextureRect(sf::IntRect(sprite * width, sens * height, width, height));
 }
 
 void Player::moveRight(bool cond)

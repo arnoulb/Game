@@ -40,6 +40,7 @@ private:
 	int width;
 	int height;
 	int sens;
+	int sprite;
 
 };
 

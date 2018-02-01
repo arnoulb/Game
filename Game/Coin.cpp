@@ -1,6 +1,4 @@
 #include "Coin.h"
-
-#include "Coin.h"
 #include <iostream>
 #include <SFML/System.hpp>
 
@@ -12,9 +10,14 @@ Coin::Coin()
 	height = texture.getSize().y;
 	coin.setTexture(texture);
 	coin.setTextureRect(sf::IntRect(0, 0, width, height));
-	coin.setPosition(100, 100);
+	coin.setPosition(rand() % 1000, rand() % 800);
 	coin.scale(0.5, 0.5);
 	sprite = 0;
+
+	fpsCount = 0;
+	fpsSwitch = 25;
+	fpsSpeed = 500;
+	fpsUpdate = true;
 }
 
 Coin::~Coin()
@@ -38,9 +41,19 @@ void Coin::newPosition(sf::RenderWindow &win)
 	coin.setPosition(rand() % size.x, rand() % size.y);
 
 }
+
 const sf::Sprite &Coin::getCoin()
 {
-	sprite = (sprite + 1) % 10;
-	coin.setTextureRect(sf::IntRect(sprite * width, 0, width, height));
+	if (fpsUpdate)
+		fpsCount += fpsSpeed * (time.restart()).asSeconds();
+	else
+		fpsCount = 0;
+	if (fpsCount >= fpsSwitch)
+	{
+		sprite = (sprite + 1) % 10;
+		fpsCount -= fpsSwitch;
+	}
+
+ 	coin.setTextureRect(sf::IntRect(sprite * width, 0, width, height));
 	return (coin);
 }
